@@ -11,7 +11,7 @@ class Store
   end
 
   def item_on_stock?(name)
-    Stock::AVAILABLE_ITEMS.keys.include?(name)
+    Stock::RATE_CHART.keys.include?(name)
   end
   
   def add_item(quantity, item)
@@ -22,6 +22,6 @@ class Store
 
   def print_amount 
     puts @items.size.zero? ? "Purchase some items from store!" 
-    : "Total price: #{self.total_amount} \n You saved #{self.saved_amount.round(2)} today."
+    : "Total price: #{self.total_amount(@items)} \n You saved #{self.saved_amount(@items).round(2)} today."
     end
 end

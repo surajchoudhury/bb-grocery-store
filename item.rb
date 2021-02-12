@@ -4,7 +4,7 @@ class Item
   def initialize(name, quantity)
     @name = name
     @quantity = quantity
-    @unit_price =  Stock::AVAILABLE_ITEMS[@name] 
+    @unit_price =  Stock::RATE_CHART[@name] 
   end
 
   def price 

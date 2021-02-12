@@ -1,19 +1,18 @@
 class Item
-  attr_reader :name, :quantity, :unit_price
+  attr_reader :name, :unit_price
 
-  def initialize(name, quantity)
+  def initialize(name)
     @name = name
-    @quantity = quantity
     @unit_price =  Stock::RATE_CHART[@name] 
   end
 
-  def price 
+  def price(quantity)
     sales =  Stock::ITEMS_ON_SALE[@name]
-    sales.nil? ? @unit_price * @quantity : sales_price(sales)
+    sales.nil? ? @unit_price * quantity : sales_price(quantity, sales)
   end
 
-  def sales_price(sales)
-    (@quantity / sales[:quantity] * sales[:price]) +
-    (@quantity % sales[:quantity] * @unit_price)
+  def sales_price(quantity, sales)
+    (quantity / sales[:quantity] * sales[:price]) +
+    (quantity % sales[:quantity] * @unit_price)
   end
 end
